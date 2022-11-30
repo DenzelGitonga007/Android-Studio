@@ -3,6 +3,7 @@ package com.example.crud_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
@@ -31,12 +32,21 @@ public class MainActivity extends AppCompatActivity {
         b1 = findViewById(R.id.btn_add);
         b2 = findViewById(R.id.btn_view);
 
+
         //    Setting the codes for execution
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //            Call the insert function
                 insert();
+            }
+        });
+//        Linking the view button
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),view.class);
+                startActivity(i);
             }
         });
 
@@ -49,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             String course = ed2.getText().toString();
             String fees = ed3.getText().toString();
 //            Database connection
-            SQLiteDatabase db = openOrCreateDatabase(name = "Crud_Application_DB", Context.MODE_PRIVATE, null);
+            SQLiteDatabase db = openOrCreateDatabase("Crud_Application_DB", Context.MODE_PRIVATE, null);
 //            Tables
             db.execSQL("CREATE TABLE IF NOT EXISTS records(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, course VARCHAR, fees VARCHAR)");
 //            Sql query
@@ -57,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 //            Sql statements
             SQLiteStatement statement = db.compileStatement(sql);
             statement.bindString(1, name);
-            statement.bindString(1, course);
-            statement.bindString(1, fees);
+            statement.bindString(2, course);
+            statement.bindString(3, fees);
             statement.execute();
 //            Show success message upon success addition
             Toast.makeText(this, "Course details added successfully...", Toast.LENGTH_LONG).show();
