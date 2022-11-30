@@ -108,17 +108,18 @@
             android:layout_weight="1"
             android:id="@+id/btn_add"
             android:text="Add"
-            android:background="@color/design_default_color_secondary"
+            android:background="@color/material_dynamic_primary0"
             />
-        <!--Add button-->
+        <!--View button-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/btn_view"
-            android:text="Add"
+            android:text="View"
             android:background="@color/design_default_color_error"
             />
+
     </LinearLayout>
 
 <!--End of first layout-->
