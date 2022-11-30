@@ -72,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
             statement.execute();
 //            Show success message upon success addition
             Toast.makeText(this, "Course details added successfully...", Toast.LENGTH_LONG).show();
+//            Clearing the texts after inserting
+            ed1.setText("");
+            ed2.setText("");
+            ed3.setText("");
+//            Set the focus to be on the first input
+            ed1.requestFocus();
 
         }
         catch (Exception ex) {

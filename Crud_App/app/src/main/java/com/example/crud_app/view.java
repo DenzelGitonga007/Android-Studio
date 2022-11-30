@@ -3,11 +3,15 @@ package com.example.crud_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,11 +51,27 @@ public class view extends AppCompatActivity {
                 stu.course = c.getString(course);
                 stu.fees = c.getString(fees);
                 stud.add(stu);
-                titles.add(c.getString(id) + "\t" + c.getString(name) + "\t" + c.getString(course) + "\t" + c.getString(fees) + "\t");
+                titles.add(c.getString(id) + "\t" + c.getString(name) + "\t" + c.getString(course) + "\t" + "\t" + c.getString(fees));
 
             }while (c.moveToNext());
             arrayAdapter.notifyDataSetChanged();
             list_view.invalidateViews();
         }
+//        Make the values clickable
+        list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String as = titles.get(position).toString();
+//                Toast.makeText(getApplicationContext(),as,Toast.LENGTH_LONG).show();
+                student stu = stud.get(position);
+//                Send the data to edit, or direct the page to edit
+                Intent i = new Intent(getApplicationContext(),edit.class);
+                i.putExtra("id", stu.id);
+                i.putExtra("name", stu.name);
+                i.putExtra("course", stu.course);
+                i.putExtra("fees", stu.fees);
+                startActivity(i);
+            }
+        });
     }
 }
